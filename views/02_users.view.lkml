@@ -104,6 +104,17 @@ view: users {
     required_fields: [name, first_name]
   }
 
+  dimension: numero_de_telefono {
+    label: "phone"
+    sql:   '+1 ' ||
+right(cast(trunc(rand(),10) as string),3)
+
+|| ' ' ||
+right(cast(trunc(rand(),10) as string),3)
+|| ' ' ||
+right(cast(trunc(rand(),10) as string),4) ;;
+  }
+
   dimension: image_file {
     label: "Image File"
     hidden: yes
@@ -211,14 +222,14 @@ view: users {
                 CAST(FLOOR(10*RAND()) AS INT64),CAST(FLOOR(10*RAND()) AS INT64));;
   }
 
-  dimension: ssn_last_4 {
-    label: "SSN Last 4"
-    description: "Only users with sufficient permissions will see this data"
-    type: string
-    sql: CASE WHEN '{{_user_attributes["can_see_sensitive_data"]}}' = 'Yes'
-                THEN ${ssn}
-                ELSE '####' END;;
-  }
+  # dimension: ssn_last_4 {
+  #   label: "SSN Last 4"
+  #   description: "Only users with sufficient permissions will see this data"
+  #   type: string
+  #   sql: CASE WHEN '{{_user_attributes["can_see_sensitive_data"]}}' = 'Yes'
+  #               THEN ${ssn}
+  #               ELSE '####' END;;
+  # }
 
   ## MEASURES ##
 
