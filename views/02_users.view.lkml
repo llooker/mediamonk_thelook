@@ -104,8 +104,7 @@ view: users {
     required_fields: [name, first_name]
   }
 
-  dimension: numero_de_telefono {
-    label: "phone"
+  dimension: phone_number {
     sql:   '+1 ' ||
 right(cast(trunc(rand(),10) as string),3)
 
